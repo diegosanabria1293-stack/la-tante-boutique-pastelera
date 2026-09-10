@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Tante · Boutique Pastelera</title>
+<meta name="description" content="La Tante · Boutique Pastelera. Repostería artesanal hecha con amor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- =========================================================
+     ▓▓▓  CONFIGURACIÓN EDITABLE  ▓▓▓
+     Cambia aquí los datos de La Tante cuando la subas real.
+     Todo lo demás se adapta solo.
+     ========================================================= -->
+<script>
+const CONFIG = {
+  // --- Datos del negocio ---
+  nombre: "La Tante",
+  tagline: "Boutique Pastelera",
+  descripcion_corta: "Repostería artesanal hecha con amor, en el corazón de la ciudad.",
+
+  // --- Contacto ---
+  telefono: "+57 300 123 4567",
+  whatsapp: "573001234567",           // solo números, con indicativo país
+  email: "hola@latante.co",
+  direccion: "Cra. 43 #10-25, El Poblado",
+  ciudad: "Medellín, Colombia",
+
+  // --- Redes sociales (deja "" si no aplica) ---
+  instagram: "https://instagram.com/latante",
+  facebook:  "https://facebook.com/latante",
+  tiktok:    "https://tiktok.com/@latante",
+
+  // --- Horarios ---
+  horarios: [
+    { dia: "Lunes a Viernes", horas: "8:00 a.m. — 8:00 p.m." },
+    { dia: "Sábados",         horas: "9:00 a.m. — 9:00 p.m." },
+    { dia: "Domingos",        horas: "10:00 a.m. — 6:00 p.m." },
+    { dia: "Festivos",        horas: "10:00 a.m. — 4:00 p.m." }
+  ],
+
+  // --- Menú digital ---
+  // Aquí defines a qué archivo apunta el botón "Ver menú" y el QR de la mesa
+  menu_url: "menu.html",              // cambia por "menu.html" o "https://tudominio.com/menu"
+  mesa_demo: "1",                     // mesa por defecto al abrir el menú
+
+  // --- Favoritos (productos que aparecen en la landing) ---
+  // La categoría debe ser una de: panaderia, tortas, cupcakes, galletas
+  favoritos: [
+    {
+      nombre: "Croissant de mantequilla",
+      descripcion: "Hojaldre francés clásico, dorado por fuera y suave por dentro.",
+      precio: 6500,
+      categoria: "panaderia"
+    },
+    {
+      nombre: "Torta de chocolate",
+      descripcion: "Tres capas húmedas de chocolate con ganache oscuro.",
+      precio: 9000,
+      categoria: "tortas"
+    },
+    {
+      nombre: "Cupcake de vainilla",
+      descripcion: "Bizcocho esponjoso con betún de mantequilla y chispitas.",
+      precio: 5000,
+      categoria: "cupcakes"
+    },
+    {
+      nombre: "Galletas con chispas (x2)",
+      descripcion: "Receta de la casa con chispas de chocolate belga.",
+      precio: 4200,
+      categoria: "galletas"
+    }
+  ]
+};
+</script>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="mark">Lt</span>
+      <span>La Tante</span>
+    </a>
+    <div class="nav-links">
+      <a href="#historia">Nuestra historia</a>
+      <a href="#favoritos">Favoritos</a>
+      <a href="#visitanos">Visítanos</a>
+      <a href="#menu-digital">Menú digital</a>
+    </div>
+    <a class="nav-cta" id="nav-menu-btn" href="#">Ver el menú</a>
+    <button class="nav-burger" id="open-mobile">☰</button>
+  </div>
+</nav>
+
+<!-- Menú móvil -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="head">
+    <span class="nav-logo"><span class="mark">Lt</span><span>La Tante</span></span>
+    <button class="close" id="close-mobile">✕</button>
+  </div>
+  <nav>
+    <a href="#historia" data-close>Nuestra historia</a>
+    <a href="#favoritos" data-close>Favoritos</a>
+    <a href="#visitanos" data-close>Visítanos</a>
+    <a href="#menu-digital" data-close>Menú digital</a>
+    <a href="#" id="mobile-menu-btn" style="color:var(--brand-pink-deep);">Ver el menú →</a>
+  </nav>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal">
+        <span class="eyebrow" id="hero-eyebrow">Boutique Pastelera</span>
+        <h1 class="hero-title">
+          Repostería <em>artesanal</em><br>
+          hecha con amor.
+        </h1>
+        <p class="hero-desc" id="hero-desc">
+          En La Tante horneamos cada día pensando en ese momento en que algo dulce
+          cambia por completo la mañana. Ingredientes reales, recetas de casa.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" id="hero-menu-btn" href="#">Ver el menú digital →</a>
+          <a class="btn btn-outline" href="#visitanos">Cómo llegar</a>
+        </div>
+        <div class="hero-trust">
+          <div><span class="star">★★★★★</span> <span>4.9 · 320 reseñas</span></div>
+          <div><span>🥐</span> <span>Horneado diario</span></div>
+          <div><span>🌿</span> <span>Ingredientes naturales</span></div>
+        </div>
+      </div>
+
+      <div class="hero-art reveal">
+        <div class="circle-bg"></div>
+        <div class="hero-logo">
+          <p class="ring-text top">· Boutique ·</p>
+          <div class="name script">La Tante</div>
+          <p class="ring-text bottom">· Pastelera ·</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== HISTORIA ==================== -->
+<section class="about" id="historia">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-art reveal">
+        <div class="quote script">"Hecho a mano,<br>de principio a fin."</div>
+      </div>
+      <div class="about-text reveal">
+        <span class="eyebrow">Nuestra historia</span>
+        <h2 style="margin-top:16px;">Un taller pequeño,<br>una <em>obsesión</em> grande.</h2>
+        <p>
+          La Tante nació en una cocina pequeña, con una batidora heredada y
+          la idea de que lo dulce también puede ser honesto. Cada croissant,
+          cada torta y cada galleta se hace en lotes pequeños, a mano, sin atajos.
+        </p>
+        <p>
+          Nos gusta que la gente entre, huela a mantequilla y se quede un rato.
+          Por eso cada cosa que sale de nuestro horno lleva tiempo, cariño y
+          muy buenos ingredientes. Así de simple.
+        </p>
+        <div class="about-signature script">
+          La Tante
+          <small>Boutique Pastelera</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAVORITOS ==================== -->
+<section id="favoritos">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <span class="eyebrow">Lo más pedido</span>
+      <h2>Algunos <em>favoritos</em> de la casa.</h2>
+      <p>Un pedacito del menú. Pide todo desde tu mesa con el QR digital.</p>
+    </div>
+    <div class="favs-grid" id="favs-grid">
+      <!-- Se generan dinámicamente desde CONFIG.favoritos -->
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MENÚ DIGITAL / QR ==================== -->
+<section id="menu-digital" style="padding-top:20px;">
+  <div class="wrap">
+    <div class="menucard reveal">
+      <div>
+        <span class="eyebrow" style="color:#F5C7D5;">Mesa digital</span>
+        <h2 style="margin-top:14px;">Escanea, elige<br>y nosotros te lo <em>llevamos</em>.</h2>
+        <p>
+          Cada mesa tiene su código QR. Escanea con tu celular, ve el menú en
+          tiempo real, paga en línea o en efectivo, y sigue tu pedido sin
+          llamar a nadie. Simple, rápido, sin esperas.
+        </p>
+        <a class="btn btn-light" id="qr-menu-btn" href="#">Abrir el menú →</a>
+      </div>
+      <div class="qr-art">
+        <div class="qr-box">
+          <div id="qr-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VISÍTANOS ==================== -->
+<section id="visitanos" style="background:#fff;border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <span class="eyebrow">Visítanos</span>
+      <h2>Te esperamos con <em>algo dulce</em>.</h2>
+    </div>
+    <div class="info-grid">
+      <div class="info-block reveal">
+        <h3><span class="dot">📍</span> Dónde estamos</h3>
+        <p class="address" id="info-address">
+          Cra. 43 #10-25, El Poblado<br>
+          Medellín, Colombia
+        </p>
+        <p class="address" id="info-contact" style="margin-bottom:24px;">
+          <a id="info-phone" href="#" style="color:var(--brand-pink-deep);font-weight:500;">+57 300 123 4567</a><br>
+          <a id="info-email" href="#" style="color:var(--brand-pink-deep);font-weight:500;">hola@latante.co</a>
+        </p>
+        <div class="map-frame" id="map-frame">
+          🗺️ Mapa interactivo<br><small style="font-family:var(--font-body);color:var(--ink-soft);font-size:12px;margin-top:6px;">(aquí va el embed de Google Maps)</small>
+        </div>
+      </div>
+
+      <div class="info-block reveal">
+        <h3><span class="dot">🕐</span> Horarios</h3>
+        <ul id="hours-list">
+          <!-- Se generan desde CONFIG.horarios -->
+        </ul>
+        <div style="margin-top:28px;padding:20px;background:var(--brand-pink-soft);border-radius:var(--radius-sm);border:1px solid #F1D5DE;">
+          <p style="margin:0 0 12px;font-size:14px;color:var(--ink);">
+            ¿Quieres pedir para un evento, cumpleaños o regalo corporativo?
+          </p>
+          <a class="btn btn-primary" id="wa-btn" href="#" style="padding:10px 20px;font-size:13.5px;">
+            Escríbenos por WhatsApp →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo script">La Tante</div>
+        <p>Boutique pastelera. Repostería artesanal hecha en pequeños lotes, todos los días.</p>
+        <div class="socials" id="socials"></div>
+      </div>
+      <div class="footer-col">
+        <h4>Explorar</h4>
+        <ul>
+          <li><a href="#historia">Historia</a></li>
+          <li><a href="#favoritos">Favoritos</a></li>
+          <li><a href="#visitanos">Visítanos</a></li>
+          <li><a href="#" id="foot-menu-link">Menú digital</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#favoritos">Panadería</a></li>
+          <li><a href="#favoritos">Tortas</a></li>
+          <li><a href="#favoritos">Cupcakes</a></li>
+          <li><a href="#favoritos">Galletas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a id="foot-phone" href="#">+57 300 123 4567</a></li>
+          <li><a id="foot-email" href="#">hola@latante.co</a></li>
+          <li><a href="#visitanos">Cómo llegar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> La Tante · Todos los derechos reservados.</span>
+      <span>Hecho con 🩷 en Medellín, Colombia.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   RENDER DINÁMICO A PARTIR DE CONFIG
+   ========================================================= */
+
+/* --- Iconos SVG para cada categoría --- */
+const CATEGORY_ICONS = {
+  panaderia: (color) => `<svg viewBox="0 0 40 40" fill="none">
+    <path d="M8 26c3-9 8-15 12-15s9 6 12 15" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+    <path d="M9 26h22" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="14" cy="16" r="1.6" fill="${color}"/>
+    <circle cx="20" cy="12" r="1.6" fill="${color}"/>
+    <circle cx="26" cy="16" r="1.6" fill="${color}"/>
+  </svg>`,
+  tortas: (color) => `<svg viewBox="0 0 40 40" fill="none">
+    <path d="M9 22c0-6 5-10 11-10s11 4 11 10v5H9v-5z" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M9 27h22" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+    <path d="M20 12V8M20 8l-2-2M20 8l2-2" stroke="${color}" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>`,
+  cupcakes: (color) => `<svg viewBox="0 0 40 40" fill="none">
+    <path d="M11 20c0-4 4-7 9-7s9 3 9 7" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+    <path d="M11 20h18v8c0 1.7-1.3 3-3 3H14c-1.7 0-3-1.3-3-3v-8z" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="20" cy="10" r="1.6" fill="${color}"/>
+  </svg>`,
+  galletas: (color) => `<svg viewBox="0 0 40 40" fill="none">
+    <circle cx="20" cy="20" r="11" stroke="${color}" stroke-width="2"/>
+    <circle cx="16" cy="17" r="1.6" fill="${color}"/>
+    <circle cx="24" cy="18" r="1.6" fill="${color}"/>
+    <circle cx="20" cy="25" r="1.6" fill="${color}"/>
+    <circle cx="25" cy="24" r="1.2" fill="${color}"/>
+  </svg>`
+};
+const CAT_COLOR = { panaderia:'#E8A33D', tortas:'#C6486B', cupcakes:'#4C7A5E', galletas:'#8B5E83' };
+const CAT_LABEL = { panaderia:'Panadería', tortas:'Tortas', cupcakes:'Cupcakes', galletas:'Galletas' };
+
+/* --- Formato de precios --- */
+function fmtCOP(n){ return '$' + new Intl.NumberFormat('es-CO').format(n); }
+
+/* --- Inyectar textos del CONFIG en el HTML --- */
+function aplicarConfig(){
+  document.title = `${CONFIG.nombre} · ${CONFIG.tagline}`;
+  document.querySelector('meta[name="description"]').setAttribute('content', `${CONFIG.nombre} · ${CONFIG.tagline}. ${CONFIG.descripcion_corta}`);
+  document.getElementById('hero-eyebrow').textContent = CONFIG.tagline;
+  document.getElementById('hero-desc').textContent = CONFIG.descripcion_corta;
+
+  // Enlaces al menú
+  const menuUrl = `${CONFIG.menu_url}?mesa=${CONFIG.mesa_demo}`;
+  ['nav-menu-btn','hero-menu-btn','mobile-menu-btn','qr-menu-btn','foot-menu-link'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.setAttribute('href', menuUrl);
+  });
+
+  // Contacto
+  const telFmt = CONFIG.telefono;
+  document.getElementById('info-address').innerHTML = `${CONFIG.direccion}<br>${CONFIG.ciudad}`;
+  document.getElementById('info-phone').textContent = telFmt;
+  document.getElementById('info-phone').setAttribute('href', `tel:${CONFIG.telefono.replace(/\s+/g,'')}`);
+  document.getElementById('info-email').textContent = CONFIG.email;
+  document.getElementById('info-email').setAttribute('href', `mailto:${CONFIG.email}`);
+  document.getElementById('foot-phone').textContent = telFmt;
+  document.getElementById('foot-phone').setAttribute('href', `tel:${CONFIG.telefono.replace(/\s+/g,'')}`);
+  document.getElementById('foot-email').textContent = CONFIG.email;
+  document.getElementById('foot-email').setAttribute('href', `mailto:${CONFIG.email}`);
+
+  // WhatsApp
+  const waText = encodeURIComponent(`Hola ${CONFIG.nombre}, quiero hacer un pedido.`);
+  document.getElementById('wa-btn').setAttribute('href', `https://wa.me/${CONFIG.whatsapp}?text=${waText}`);
+
+  // Año
+  document.getElementById('year').textContent = new Date().getFullYear();
+}
+
+/* --- Favoritos --- */
+function renderFavoritos(){
+  const grid = document.getElementById('favs-grid');
+  grid.innerHTML = CONFIG.favoritos.map(f=>{
+    const cat = f.categoria.toLowerCase();
+    const color = CAT_COLOR[cat] || '#C6486B';
+    const icon = (CATEGORY_ICONS[cat] || CATEGORY_ICONS.tortas)(color);
+    return `
+      <article class="fav-card">
+        <div class="fav-photo ${cat}">
+          <span class="fav-tag">${CAT_LABEL[cat] || cat}</span>
+          ${icon}
+        </div>
+        <div class="fav-body">
+          <h3>${f.nombre}</h3>
+          <p>${f.descripcion}</p>
+          <div class="fav-foot">
+            <span class="fav-price">${fmtCOP(f.precio)}</span>
+            <a class="fav-link" href="${CONFIG.menu_url}?mesa=${CONFIG.mesa_demo}">Pedir <span>→</span></a>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+/* --- Horarios --- */
+function renderHorarios(){
+  const ul = document.getElementById('hours-list');
+  const hoy = new Date().getDay(); // 0=domingo, 1=lunes...
+  const itemHoy = (hoy >= 1 && hoy <= 5) ? 0 : (hoy === 6 ? 1 : 2);
+  ul.innerHTML = CONFIG.horarios.map((h, i) => `
+    <li class="${i === itemHoy ? 'today' : ''}">
+      <span class="label">${h.dia}</span>
+      <span class="value">${h.horas}</span>
+    </li>
+  `).join('');
+}
+
+/* --- Redes sociales --- */
+function renderSocials(){
+  const box = document.getElementById('socials');
+  const items = [
+    { url: CONFIG.instagram, icon:'IG', label:'Instagram' },
+    { url: CONFIG.facebook,  icon:'FB', label:'Facebook' },
+    { url: CONFIG.tiktok,    icon:'TT', label:'TikTok' }
+  ].filter(s => s.url);
+  box.innerHTML = items.map(s => `
+    <a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}">${s.icon}</a>
+  `).join('');
+}
+
+/* --- QR simple decorativo (SVG) --- */
+function renderQR(){
+  const grid = [
+    [1,1,1,0,1,0,1,1,1],[1,0,1,0,0,0,1,0,1],[1,0,1,0,1,0,1,0,1],
+    [0,0,0,0,1,0,0,0,0],[1,1,0,1,0,1,0,1,1],[0,0,0,0,1,0,0,0,0],
+    [1,0,1,0,1,0,1,0,1],[1,0,1,0,0,0,1,0,1],[1,1,1,0,1,0,1,1,1]
+  ];
+  let cells = '';
+  const s = 9.7;
+  grid.forEach((row,y) => row.forEach((v,x)=>{
+    if(v) cells += `<rect x="${x*s}" y="${y*s}" width="${s}" height="${s}" fill="#241710"/>`;
+  }));
+  document.getElementById('qr-container').innerHTML =
+    `<svg viewBox="0 0 88 88" width="130" height="130" style="background:#fff;border-radius:6px;">${cells}</svg>`;
+}
+
+/* --- Nav: cambio de fondo al hacer scroll --- */
+function setupNav(){
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+}
+
+/* --- Menú móvil --- */
+function setupMobileMenu(){
+  const menu = document.getElementById('mobile-menu');
+  document.getElementById('open-mobile').onclick = () => menu.classList.add('open');
+  document.getElementById('close-mobile').onclick = () => menu.classList.remove('open');
+  menu.querySelectorAll('[data-close]').forEach(a => {
+    a.onclick = () => menu.classList.remove('open');
+  });
+}
+
+/* --- Animación de entrada --- */
+function setupReveal(){
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+}
+
+/* --- Bootstrap --- */
+document.addEventListener('DOMContentLoaded', () => {
+  aplicarConfig();
+  renderFavoritos();
+  renderHorarios();
+  renderSocials();
+  renderQR();
+  setupNav();
+  setupMobileMenu();
+  setupReveal();
+});
+</script>
+</body>
+</html>
