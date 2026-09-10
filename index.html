@@ -8,14 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- =========================================================
      ▓▓▓  CONFIGURACIÓN EDITABLE  ▓▓▓
-     Cambia aquí los datos de La Tante cuando la subas real.
-     Todo lo demás se adapta solo.
+     Nota: el menú digital (menu.html) NO se enlaza desde aquí.
+     Los QR físicos del restaurante apuntan directamente a:
+        tudominio.com/menu?mesa=1
+        tudominio.com/menu?mesa=2   etc.
      ========================================================= -->
 <script>
 const CONFIG = {
@@ -26,7 +28,7 @@ const CONFIG = {
 
   // --- Contacto ---
   telefono: "+57 300 123 4567",
-  whatsapp: "573001234567",           // solo números, con indicativo país
+  whatsapp: "573001234567",
   email: "hola@latante.co",
   direccion: "Cra. 43 #10-25, El Poblado",
   ciudad: "Medellín, Colombia",
@@ -44,38 +46,13 @@ const CONFIG = {
     { dia: "Festivos",        horas: "10:00 a.m. — 4:00 p.m." }
   ],
 
-  // --- Menú digital ---
-  // Aquí defines a qué archivo apunta el botón "Ver menú" y el QR de la mesa
-  menu_url: "menu.html",              // cambia por "menu.html" o "https://tudominio.com/menu"
-  mesa_demo: "1",                     // mesa por defecto al abrir el menú
-
-  // --- Favoritos (productos que aparecen en la landing) ---
-  // La categoría debe ser una de: panaderia, tortas, cupcakes, galletas
+  // --- Favoritos que aparecen en la landing ---
+  // Categoría válida: panaderia, tortas, cupcakes, galletas
   favoritos: [
-    {
-      nombre: "Croissant de mantequilla",
-      descripcion: "Hojaldre francés clásico, dorado por fuera y suave por dentro.",
-      precio: 6500,
-      categoria: "panaderia"
-    },
-    {
-      nombre: "Torta de chocolate",
-      descripcion: "Tres capas húmedas de chocolate con ganache oscuro.",
-      precio: 9000,
-      categoria: "tortas"
-    },
-    {
-      nombre: "Cupcake de vainilla",
-      descripcion: "Bizcocho esponjoso con betún de mantequilla y chispitas.",
-      precio: 5000,
-      categoria: "cupcakes"
-    },
-    {
-      nombre: "Galletas con chispas (x2)",
-      descripcion: "Receta de la casa con chispas de chocolate belga.",
-      precio: 4200,
-      categoria: "galletas"
-    }
+    { nombre: "Croissant de mantequilla", descripcion: "Hojaldre francés clásico, dorado por fuera y suave por dentro.", precio: 6500, categoria: "panaderia" },
+    { nombre: "Torta de chocolate",       descripcion: "Tres capas húmedas de chocolate con ganache oscuro.",            precio: 9000, categoria: "tortas" },
+    { nombre: "Cupcake de vainilla",      descripcion: "Bizcocho esponjoso con betún de mantequilla y chispitas.",      precio: 5000, categoria: "cupcakes" },
+    { nombre: "Galletas con chispas (x2)", descripcion: "Receta de la casa con chispas de chocolate belga.",             precio: 4200, categoria: "galletas" }
   ]
 };
 </script>
@@ -91,9 +68,8 @@ const CONFIG = {
       <a href="#historia">Nuestra historia</a>
       <a href="#favoritos">Favoritos</a>
       <a href="#visitanos">Visítanos</a>
-      <a href="#menu-digital">Menú digital</a>
     </div>
-    <a class="nav-cta" id="nav-menu-btn" href="#">Ver el menú</a>
+    <a class="nav-cta" id="nav-wa-btn" href="#" target="_blank" rel="noopener">Escríbenos</a>
     <button class="nav-burger" id="open-mobile">☰</button>
   </div>
 </nav>
@@ -108,8 +84,7 @@ const CONFIG = {
     <a href="#historia" data-close>Nuestra historia</a>
     <a href="#favoritos" data-close>Favoritos</a>
     <a href="#visitanos" data-close>Visítanos</a>
-    <a href="#menu-digital" data-close>Menú digital</a>
-    <a href="#" id="mobile-menu-btn" style="color:var(--brand-pink-deep);">Ver el menú →</a>
+    <a href="#" id="mobile-wa-btn" data-close style="color:var(--brand-pink-deep);">Escríbenos →</a>
   </nav>
 </div>
 
@@ -128,7 +103,7 @@ const CONFIG = {
           cambia por completo la mañana. Ingredientes reales, recetas de casa.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" id="hero-menu-btn" href="#">Ver el menú digital →</a>
+          <a class="btn btn-primary" id="hero-wa-btn" href="#" target="_blank" rel="noopener">Pedidos por WhatsApp →</a>
           <a class="btn btn-outline" href="#visitanos">Cómo llegar</a>
         </div>
         <div class="hero-trust">
@@ -185,33 +160,10 @@ const CONFIG = {
     <div class="section-header reveal">
       <span class="eyebrow">Lo más pedido</span>
       <h2>Algunos <em>favoritos</em> de la casa.</h2>
-      <p>Un pedacito del menú. Pide todo desde tu mesa con el QR digital.</p>
+      <p>Pide por WhatsApp para recoger o pásate por el local a probarlos recién horneados.</p>
     </div>
     <div class="favs-grid" id="favs-grid">
-      <!-- Se generan dinámicamente desde CONFIG.favoritos -->
-    </div>
-  </div>
-</section>
-
-<!-- ==================== MENÚ DIGITAL / QR ==================== -->
-<section id="menu-digital" style="padding-top:20px;">
-  <div class="wrap">
-    <div class="menucard reveal">
-      <div>
-        <span class="eyebrow" style="color:#F5C7D5;">Mesa digital</span>
-        <h2 style="margin-top:14px;">Escanea, elige<br>y nosotros te lo <em>llevamos</em>.</h2>
-        <p>
-          Cada mesa tiene su código QR. Escanea con tu celular, ve el menú en
-          tiempo real, paga en línea o en efectivo, y sigue tu pedido sin
-          llamar a nadie. Simple, rápido, sin esperas.
-        </p>
-        <a class="btn btn-light" id="qr-menu-btn" href="#">Abrir el menú →</a>
-      </div>
-      <div class="qr-art">
-        <div class="qr-box">
-          <div id="qr-container"></div>
-        </div>
-      </div>
+      <!-- Se generan dinámicamente -->
     </div>
   </div>
 </section>
@@ -226,13 +178,10 @@ const CONFIG = {
     <div class="info-grid">
       <div class="info-block reveal">
         <h3><span class="dot">📍</span> Dónde estamos</h3>
-        <p class="address" id="info-address">
-          Cra. 43 #10-25, El Poblado<br>
-          Medellín, Colombia
-        </p>
+        <p class="address" id="info-address"></p>
         <p class="address" id="info-contact" style="margin-bottom:24px;">
-          <a id="info-phone" href="#" style="color:var(--brand-pink-deep);font-weight:500;">+57 300 123 4567</a><br>
-          <a id="info-email" href="#" style="color:var(--brand-pink-deep);font-weight:500;">hola@latante.co</a>
+          <a id="info-phone" href="#" style="color:var(--brand-pink-deep);font-weight:500;"></a><br>
+          <a id="info-email" href="#" style="color:var(--brand-pink-deep);font-weight:500;"></a>
         </p>
         <div class="map-frame" id="map-frame">
           🗺️ Mapa interactivo<br><small style="font-family:var(--font-body);color:var(--ink-soft);font-size:12px;margin-top:6px;">(aquí va el embed de Google Maps)</small>
@@ -241,14 +190,12 @@ const CONFIG = {
 
       <div class="info-block reveal">
         <h3><span class="dot">🕐</span> Horarios</h3>
-        <ul id="hours-list">
-          <!-- Se generan desde CONFIG.horarios -->
-        </ul>
+        <ul id="hours-list"></ul>
         <div style="margin-top:28px;padding:20px;background:var(--brand-pink-soft);border-radius:var(--radius-sm);border:1px solid #F1D5DE;">
           <p style="margin:0 0 12px;font-size:14px;color:var(--ink);">
             ¿Quieres pedir para un evento, cumpleaños o regalo corporativo?
           </p>
-          <a class="btn btn-primary" id="wa-btn" href="#" style="padding:10px 20px;font-size:13.5px;">
+          <a class="btn btn-primary" id="wa-btn" href="#" target="_blank" rel="noopener" style="padding:10px 20px;font-size:13.5px;">
             Escríbenos por WhatsApp →
           </a>
         </div>
@@ -272,7 +219,6 @@ const CONFIG = {
           <li><a href="#historia">Historia</a></li>
           <li><a href="#favoritos">Favoritos</a></li>
           <li><a href="#visitanos">Visítanos</a></li>
-          <li><a href="#" id="foot-menu-link">Menú digital</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -287,9 +233,9 @@ const CONFIG = {
       <div class="footer-col">
         <h4>Contacto</h4>
         <ul>
-          <li><a id="foot-phone" href="#">+57 300 123 4567</a></li>
-          <li><a id="foot-email" href="#">hola@latante.co</a></li>
-          <li><a href="#visitanos">Cómo llegar</a></li>
+          <li><a id="foot-phone" href="#"></a></li>
+          <li><a id="foot-email" href="#"></a></li>
+          <li><a href="#" id="foot-wa-link">Pedidos por WhatsApp</a></li>
         </ul>
       </div>
     </div>
@@ -301,84 +247,57 @@ const CONFIG = {
 </footer>
 
 <script>
-/* =========================================================
-   RENDER DINÁMICO A PARTIR DE CONFIG
-   ========================================================= */
-
-/* --- Iconos SVG para cada categoría --- */
+/* ================= ICONOS SVG POR CATEGORÍA ================= */
 const CATEGORY_ICONS = {
-  panaderia: (color) => `<svg viewBox="0 0 40 40" fill="none">
-    <path d="M8 26c3-9 8-15 12-15s9 6 12 15" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
-    <path d="M9 26h22" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
-    <circle cx="14" cy="16" r="1.6" fill="${color}"/>
-    <circle cx="20" cy="12" r="1.6" fill="${color}"/>
-    <circle cx="26" cy="16" r="1.6" fill="${color}"/>
-  </svg>`,
-  tortas: (color) => `<svg viewBox="0 0 40 40" fill="none">
-    <path d="M9 22c0-6 5-10 11-10s11 4 11 10v5H9v-5z" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M9 27h22" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
-    <path d="M20 12V8M20 8l-2-2M20 8l2-2" stroke="${color}" stroke-width="1.6" stroke-linecap="round"/>
-  </svg>`,
-  cupcakes: (color) => `<svg viewBox="0 0 40 40" fill="none">
-    <path d="M11 20c0-4 4-7 9-7s9 3 9 7" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
-    <path d="M11 20h18v8c0 1.7-1.3 3-3 3H14c-1.7 0-3-1.3-3-3v-8z" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>
-    <circle cx="20" cy="10" r="1.6" fill="${color}"/>
-  </svg>`,
-  galletas: (color) => `<svg viewBox="0 0 40 40" fill="none">
-    <circle cx="20" cy="20" r="11" stroke="${color}" stroke-width="2"/>
-    <circle cx="16" cy="17" r="1.6" fill="${color}"/>
-    <circle cx="24" cy="18" r="1.6" fill="${color}"/>
-    <circle cx="20" cy="25" r="1.6" fill="${color}"/>
-    <circle cx="25" cy="24" r="1.2" fill="${color}"/>
-  </svg>`
+  panaderia: (c) => `<svg viewBox="0 0 40 40" fill="none"><path d="M8 26c3-9 8-15 12-15s9 6 12 15" stroke="${c}" stroke-width="2" stroke-linecap="round"/><path d="M9 26h22" stroke="${c}" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="16" r="1.6" fill="${c}"/><circle cx="20" cy="12" r="1.6" fill="${c}"/><circle cx="26" cy="16" r="1.6" fill="${c}"/></svg>`,
+  tortas: (c) => `<svg viewBox="0 0 40 40" fill="none"><path d="M9 22c0-6 5-10 11-10s11 4 11 10v5H9v-5z" stroke="${c}" stroke-width="2" stroke-linejoin="round"/><path d="M9 27h22" stroke="${c}" stroke-width="2" stroke-linecap="round"/><path d="M20 12V8M20 8l-2-2M20 8l2-2" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  cupcakes: (c) => `<svg viewBox="0 0 40 40" fill="none"><path d="M11 20c0-4 4-7 9-7s9 3 9 7" stroke="${c}" stroke-width="2" stroke-linecap="round"/><path d="M11 20h18v8c0 1.7-1.3 3-3 3H14c-1.7 0-3-1.3-3-3v-8z" stroke="${c}" stroke-width="2" stroke-linejoin="round"/><circle cx="20" cy="10" r="1.6" fill="${c}"/></svg>`,
+  galletas: (c) => `<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="11" stroke="${c}" stroke-width="2"/><circle cx="16" cy="17" r="1.6" fill="${c}"/><circle cx="24" cy="18" r="1.6" fill="${c}"/><circle cx="20" cy="25" r="1.6" fill="${c}"/><circle cx="25" cy="24" r="1.2" fill="${c}"/></svg>`
 };
 const CAT_COLOR = { panaderia:'#E8A33D', tortas:'#C6486B', cupcakes:'#4C7A5E', galletas:'#8B5E83' };
 const CAT_LABEL = { panaderia:'Panadería', tortas:'Tortas', cupcakes:'Cupcakes', galletas:'Galletas' };
 
-/* --- Formato de precios --- */
 function fmtCOP(n){ return '$' + new Intl.NumberFormat('es-CO').format(n); }
+function waLink(msg){
+  return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+}
 
-/* --- Inyectar textos del CONFIG en el HTML --- */
+/* ================= APLICAR CONFIG ================= */
 function aplicarConfig(){
   document.title = `${CONFIG.nombre} · ${CONFIG.tagline}`;
-  document.querySelector('meta[name="description"]').setAttribute('content', `${CONFIG.nombre} · ${CONFIG.tagline}. ${CONFIG.descripcion_corta}`);
+  document.querySelector('meta[name="description"]').setAttribute('content',
+    `${CONFIG.nombre} · ${CONFIG.tagline}. ${CONFIG.descripcion_corta}`);
   document.getElementById('hero-eyebrow').textContent = CONFIG.tagline;
   document.getElementById('hero-desc').textContent = CONFIG.descripcion_corta;
 
-  // Enlaces al menú
-  const menuUrl = `${CONFIG.menu_url}?mesa=${CONFIG.mesa_demo}`;
-  ['nav-menu-btn','hero-menu-btn','mobile-menu-btn','qr-menu-btn','foot-menu-link'].forEach(id=>{
+  // WhatsApp: mensaje genérico
+  const waGeneral = waLink(`Hola ${CONFIG.nombre}, quiero hacer un pedido.`);
+  ['nav-wa-btn','hero-wa-btn','mobile-wa-btn','wa-btn','foot-wa-link'].forEach(id=>{
     const el = document.getElementById(id);
-    if(el) el.setAttribute('href', menuUrl);
+    if(el) el.setAttribute('href', waGeneral);
   });
 
   // Contacto
-  const telFmt = CONFIG.telefono;
   document.getElementById('info-address').innerHTML = `${CONFIG.direccion}<br>${CONFIG.ciudad}`;
-  document.getElementById('info-phone').textContent = telFmt;
+  document.getElementById('info-phone').textContent = CONFIG.telefono;
   document.getElementById('info-phone').setAttribute('href', `tel:${CONFIG.telefono.replace(/\s+/g,'')}`);
   document.getElementById('info-email').textContent = CONFIG.email;
   document.getElementById('info-email').setAttribute('href', `mailto:${CONFIG.email}`);
-  document.getElementById('foot-phone').textContent = telFmt;
+  document.getElementById('foot-phone').textContent = CONFIG.telefono;
   document.getElementById('foot-phone').setAttribute('href', `tel:${CONFIG.telefono.replace(/\s+/g,'')}`);
   document.getElementById('foot-email').textContent = CONFIG.email;
   document.getElementById('foot-email').setAttribute('href', `mailto:${CONFIG.email}`);
 
-  // WhatsApp
-  const waText = encodeURIComponent(`Hola ${CONFIG.nombre}, quiero hacer un pedido.`);
-  document.getElementById('wa-btn').setAttribute('href', `https://wa.me/${CONFIG.whatsapp}?text=${waText}`);
-
-  // Año
   document.getElementById('year').textContent = new Date().getFullYear();
 }
 
-/* --- Favoritos --- */
+/* ================= FAVORITOS ================= */
 function renderFavoritos(){
-  const grid = document.getElementById('favs-grid');
-  grid.innerHTML = CONFIG.favoritos.map(f=>{
+  document.getElementById('favs-grid').innerHTML = CONFIG.favoritos.map(f=>{
     const cat = f.categoria.toLowerCase();
     const color = CAT_COLOR[cat] || '#C6486B';
     const icon = (CATEGORY_ICONS[cat] || CATEGORY_ICONS.tortas)(color);
+    const wa = waLink(`Hola ${CONFIG.nombre}, quiero pedir: ${f.nombre} (${fmtCOP(f.precio)}).`);
     return `
       <article class="fav-card">
         <div class="fav-photo ${cat}">
@@ -390,65 +309,42 @@ function renderFavoritos(){
           <p>${f.descripcion}</p>
           <div class="fav-foot">
             <span class="fav-price">${fmtCOP(f.precio)}</span>
-            <a class="fav-link" href="${CONFIG.menu_url}?mesa=${CONFIG.mesa_demo}">Pedir <span>→</span></a>
+            <a class="fav-link" href="${wa}" target="_blank" rel="noopener">Pedir <span>→</span></a>
           </div>
         </div>
-      </article>
-    `;
+      </article>`;
   }).join('');
 }
 
-/* --- Horarios --- */
+/* ================= HORARIOS ================= */
 function renderHorarios(){
-  const ul = document.getElementById('hours-list');
-  const hoy = new Date().getDay(); // 0=domingo, 1=lunes...
+  const hoy = new Date().getDay();
   const itemHoy = (hoy >= 1 && hoy <= 5) ? 0 : (hoy === 6 ? 1 : 2);
-  ul.innerHTML = CONFIG.horarios.map((h, i) => `
+  document.getElementById('hours-list').innerHTML = CONFIG.horarios.map((h, i) => `
     <li class="${i === itemHoy ? 'today' : ''}">
       <span class="label">${h.dia}</span>
       <span class="value">${h.horas}</span>
-    </li>
-  `).join('');
+    </li>`).join('');
 }
 
-/* --- Redes sociales --- */
+/* ================= REDES ================= */
 function renderSocials(){
-  const box = document.getElementById('socials');
   const items = [
     { url: CONFIG.instagram, icon:'IG', label:'Instagram' },
     { url: CONFIG.facebook,  icon:'FB', label:'Facebook' },
     { url: CONFIG.tiktok,    icon:'TT', label:'TikTok' }
   ].filter(s => s.url);
-  box.innerHTML = items.map(s => `
-    <a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}">${s.icon}</a>
-  `).join('');
+  document.getElementById('socials').innerHTML = items.map(s => `
+    <a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}">${s.icon}</a>`).join('');
 }
 
-/* --- QR simple decorativo (SVG) --- */
-function renderQR(){
-  const grid = [
-    [1,1,1,0,1,0,1,1,1],[1,0,1,0,0,0,1,0,1],[1,0,1,0,1,0,1,0,1],
-    [0,0,0,0,1,0,0,0,0],[1,1,0,1,0,1,0,1,1],[0,0,0,0,1,0,0,0,0],
-    [1,0,1,0,1,0,1,0,1],[1,0,1,0,0,0,1,0,1],[1,1,1,0,1,0,1,1,1]
-  ];
-  let cells = '';
-  const s = 9.7;
-  grid.forEach((row,y) => row.forEach((v,x)=>{
-    if(v) cells += `<rect x="${x*s}" y="${y*s}" width="${s}" height="${s}" fill="#241710"/>`;
-  }));
-  document.getElementById('qr-container').innerHTML =
-    `<svg viewBox="0 0 88 88" width="130" height="130" style="background:#fff;border-radius:6px;">${cells}</svg>`;
-}
-
-/* --- Nav: cambio de fondo al hacer scroll --- */
+/* ================= NAV / MÓVIL / REVEAL ================= */
 function setupNav(){
   const nav = document.getElementById('nav');
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
-  window.addEventListener('scroll', onScroll);
-  onScroll();
+  window.addEventListener('scroll', onScroll); onScroll();
 }
 
-/* --- Menú móvil --- */
 function setupMobileMenu(){
   const menu = document.getElementById('mobile-menu');
   document.getElementById('open-mobile').onclick = () => menu.classList.add('open');
@@ -458,22 +354,19 @@ function setupMobileMenu(){
   });
 }
 
-/* --- Animación de entrada --- */
 function setupReveal(){
-  const els = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  els.forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 }
 
-/* --- Bootstrap --- */
+/* ================= BOOTSTRAP ================= */
 document.addEventListener('DOMContentLoaded', () => {
   aplicarConfig();
   renderFavoritos();
   renderHorarios();
   renderSocials();
-  renderQR();
   setupNav();
   setupMobileMenu();
   setupReveal();
